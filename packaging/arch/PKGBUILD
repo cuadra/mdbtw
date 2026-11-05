@@ -1,0 +1,39 @@
+# Builds mdreader from this checkout. From this directory run:
+#
+#   makepkg -si
+#
+# (This lives in packaging/arch because makepkg's own src/ and pkg/
+# directories would collide with the crate's src/ at the repository root.)
+
+pkgname=mdreader
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='A fast, vim-driven Markdown reader'
+arch=('x86_64' 'aarch64')
+license=('custom') # no license chosen yet
+depends=('gtk4' 'webkitgtk-6.0' 'glib2' 'gcc-libs' 'glibc')
+makedepends=('cargo')
+optdepends=(
+  'wl-clipboard: yanked text stays on the clipboard after the reader closes'
+  'gst-plugins-good: WebM (VP8/VP9) video and most audio playback'
+  'gst-libav: MP4 (H.264/AAC) video playback'
+  'gst-plugins-bad: additional video formats'
+  'noto-fonts-emoji: emoji glyphs'
+  'otf-latinmodern-math: properly typeset math'
+  'xdg-utils: open external links in the default browser'
+)
+# LTO-compiled C objects (the bundled oniguruma) cannot be linked by rustc.
+options=('!lto' '!debug')
+
+build() {
+  cd "$startdir/../.."
+  cargo build --release --locked
+}
+
+package() {
+  cd "$startdir/../.."
+  install -Dm755 target/release/mdreader "$pkgdir/usr/bin/mdreader"
+  install -Dm644 packaging/io.github.mdreader.desktop \
+    "$pkgdir/usr/share/applications/io.github.mdreader.desktop"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/mdreader/README.md"
+}

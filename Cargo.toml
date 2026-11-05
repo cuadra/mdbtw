@@ -1,0 +1,21 @@
+[package]
+name = "mdreader"
+version = "0.1.0"
+edition = "2024"
+description = "A fast, vim-driven Markdown reader"
+
+[dependencies]
+comrak = { version = "0.59.0", default-features = false, features = ["syntect-onig", "shortcodes"] }
+pulldown-latex = "0.8.0"
+serde_json = "1.0.154"
+syntect = "5.3.0"
+two-face = "0.5.2"
+# webkit6 needs gtk::Accessible, which gtk4 only exports from v4_10 on.
+gtk4 = { version = "0.11.5", features = ["v4_12"] }
+webkit6 = "0.6.1"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 4
+strip = true

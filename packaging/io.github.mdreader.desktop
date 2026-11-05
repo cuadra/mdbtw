@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=mdreader
+GenericName=Markdown Reader
+Comment=Read Markdown files with vim keys
+Exec=mdreader %f
+Icon=text-x-generic
+Terminal=false
+Categories=Office;Viewer;
+MimeType=text/markdown;text/x-markdown;
+StartupWMClass=io.github.mdreader
