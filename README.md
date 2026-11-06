@@ -3,6 +3,8 @@
 A fast Markdown reader for Linux, driven entirely by vim keys. Written in Rust on
 GTK4 + WebKitGTK.
 
+![mdreader showing syntax-highlighted code blocks](docs/screenshots/reading.png)
+
 ```sh
 mdreader README.md          # open a file
 mdreader ~/notes            # open a directory's README.md
@@ -11,6 +13,22 @@ mdreader -e out.html doc.md # export a standalone HTML page
 ```
 
 The file reloads by itself when it changes on disk, keeping your position.
+
+## Screenshots
+
+Link hints (`f`) and live search (`/`):
+
+<p>
+  <img src="docs/screenshots/hints.png" width="49%" alt="Link hints: a letter label on every link">
+  <img src="docs/screenshots/search.png" width="49%" alt="Search with every match highlighted and a match counter">
+</p>
+
+The outline (`gO`), and math, diagrams and media rendered inline:
+
+<p>
+  <img src="docs/screenshots/outline.png" width="49%" alt="Outline panel listing the document's headings">
+  <img src="docs/screenshots/rich.png" width="49%" alt="Math, a mermaid diagram and an image">
+</p>
 
 ## Install
 
